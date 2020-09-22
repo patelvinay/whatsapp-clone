@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 import Chat from "./Chat";
 import Login from "./Login";
 import Sidebar from "./Sidebar";
+import { useStateValue } from "./StateProvider";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [{ user }, dispatch] = useStateValue();
   return (
     //BEM naming convention
     <div className="App">
@@ -21,7 +22,9 @@ function App() {
               <Route path="/rooms/:roomId">
                 <Chat />
               </Route>
-              <Route path="/"></Route>
+              <Route path="/">
+                <Chat />
+              </Route>
             </Switch>
           </Router>
         </div>
